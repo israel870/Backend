@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 require('dotenv').config();
 const cors = require('cors');
-const router = require('./routes/homeNest.route')
+const router = require('./routes/staySide.route')
 const port = process.env.PORT;
 const uri = process.env.MONGODB_URI;
 app.use(cors());
@@ -29,7 +29,7 @@ app.get("/test", (req,res)=>{
     res.send("Server is alive")
 })
 
-app.use("/homenest", router)
+app.use("/stayside", router)
 
 
 

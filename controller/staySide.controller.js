@@ -18,7 +18,7 @@ const postUser = async (req, res)=>{
         const verCode = Math.floor(Math.random()*1000000).toString().padStart(6,'0');
 
         const info = await transporter.sendMail({
-            from:`${process.env.SMPT_USER}`,
+            from:`${process.env.SMTP_USER}`,
             to:`${req.body.emailAddress}`,
             subject:"Welcome to Stayside",
             html:`<div><b>Hello</b> ${req.body.firstName} </div>
@@ -29,7 +29,7 @@ const postUser = async (req, res)=>{
         res.status(200).json({"message":"sucess", savedUser})
     } catch (error) {
         console.log(error);
-        res.status(400).json("Bad request", error)
+        res.status(400).json({"message":"Bad request", error})
         
     }
 }
