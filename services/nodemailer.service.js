@@ -10,7 +10,8 @@ const transporter = nodemailer.createTransport({
         pass: process.env.SMTP_PASS
     },
     connectionTimeout:100000,
-    greetingTimeout:100000
+    greetingTimeout:100000,
+    family:4
 })
 
 module.exports = transporter;
