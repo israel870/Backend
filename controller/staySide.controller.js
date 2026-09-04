@@ -2,7 +2,7 @@ const studentModel = require("../model/User.model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const userModel = require("../model/User.model");
-const { transporter } = require("../services/nodemailer.service");
+const transporter = require("../services/nodemailer.service");
 
 const postUser = async (req, res) => {
   try {
