@@ -12,7 +12,7 @@ const postUser = async (req, res) => {
       .toString()
       .padStart(6, "0");
 
-    const info = await transporter.send({
+    const info = await transporter.sendMail({
       from: `${process.env.SMTP_USER}`,
       to: `${req.body.emailAddress}`,
       subject: "Welcome to Stayside",
@@ -21,7 +21,7 @@ const postUser = async (req, res) => {
             `,
     });
     console.log("Email sent successfully. Message ID:", info.messageId);
-    
+
     const newUser = new userModel(req.body);
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
