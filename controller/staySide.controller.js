@@ -12,7 +12,7 @@ const postUser = async (req, res) => {
       .toString()
       .padStart(6, "0");
 
-    const info = await transporter.sendMail({
+    const info = await transporter.send({
       from: `${process.env.SMTP_USER}`,
       to: `${req.body.emailAddress}`,
       subject: "Welcome to Stayside",
