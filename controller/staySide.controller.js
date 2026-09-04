@@ -20,13 +20,15 @@ const postUser = async (req, res) => {
             <h3>Your 6 digit code is </h3> ${verCode}
             `,
     });
-
+    console.log("Email sent successfully. Message ID:", info.messageId);
+    
     const newUser = new userModel(req.body);
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
     req.body.password = hashedPassword;
     const savedUser = await newUser.save();
 
+    
     res.status(200).json({ message: "sucess", savedUser });
   } catch (error) {
     console.error("Nodemailer Error:", error); // Check your terminal for this!
