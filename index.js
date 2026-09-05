@@ -1,3 +1,6 @@
+const dns = require('dns');
+dns.setDefaultResultOrder('ipv4first');
+
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -7,8 +10,7 @@ const router = require('./routes/staySide.route')
 const port = process.env.PORT;
 const uri = process.env.MONGODB_URI;
 app.use(cors());
-const dns = require('dns');
-dns.setDefaultResultOrder('ipv4first');
+
 
 mongoose.connect(uri)
     .then(()=>{
