@@ -13,15 +13,14 @@ const postUser = async (req, res) => {
       .padStart(6, "0");
 
     const info = await transporter.sendMail({
-      from: `${process.env.SMTP_USER}`,
-      to: `${req.body.emailAddress}`,
+      from: `onboarding@resend.dev`,
+      to: `israeltobiloba24@gmail.co`,
       subject: "Welcome to Stayside",
       html: `<div><b>Hello</b> ${req.body.firstName} </div>
             <h3>Your 6 digit code is </h3> ${verCode}
             `,
     });
     console.log("Email sent successfully. Message ID:", info.messageId);
-
     const newUser = new userModel(req.body);
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
