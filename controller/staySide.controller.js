@@ -15,13 +15,14 @@ const postUser = async (req, res) => {
 
     const { data, error } = await resend.emails.send({
       from: `onboarding@resend.dev`,
-      to: `israeltobiloba24@gmail.co`,
+      to: `israeltobiloba24@gmail.com`,
       subject: "Welcome to Stayside",
       html: `<div><b>Hello</b> ${req.body.firstName} </div>
             <h3>Your 6 digit code is </h3> ${verCode}
             `,
     });
     console.log("Email sent successfully. Message ID:", data);
+
     const newUser = new userModel(req.body);
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
