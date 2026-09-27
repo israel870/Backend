@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const userModel = require("../model/User.model");
 const transporter = require("../services/nodemailer.service");
+const resend = require("../config/resend");
 
 const postUser = async (req, res) => {
   try {
@@ -12,7 +13,7 @@ const postUser = async (req, res) => {
       .toString()
       .padStart(6, "0");
 
-    const info = await transporter.sendMail({
+    const { data, error } = await resend.emails.send({
       from: `onboarding@resend.dev`,
       to: `israeltobiloba24@gmail.co`,
       subject: "Welcome to Stayside",
@@ -27,6 +28,9 @@ const postUser = async (req, res) => {
     req.body.password = hashedPassword;
     const savedUser = await newUser.save();
 
+    if (error) {
+      return res.status(400).json({ success: false, error });
+    }
     
     res.status(200).json({ message: "sucess", savedUser });
   } catch (error) {
