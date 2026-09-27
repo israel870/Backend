@@ -21,7 +21,7 @@ const postUser = async (req, res) => {
             <h3>Your 6 digit code is </h3> ${verCode}
             `,
     });
-    console.log("Email sent successfully. Message ID:", info.messageId);
+    console.log("Email sent successfully. Message ID:", data);
     const newUser = new userModel(req.body);
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
